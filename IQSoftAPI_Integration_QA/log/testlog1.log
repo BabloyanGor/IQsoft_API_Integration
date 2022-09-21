@@ -1,3 +1,14 @@
-2022-09-21 12:45:55,164 [main] INFO API - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Test Suite was started 
-2022-09-21 12:45:55,911 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
-2022-09-21 12:45:55,952 [main] INFO API - <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Test Suite finished  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  
+2022-09-21 14:11:15,417 [main] INFO API - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Test Suite was started 
+2022-09-21 14:11:15,426 [main] INFO API - API Integration Automation Test Test execution starts
+2022-09-21 14:11:15,470 [main] INFO API - Pass TestCase execution starts
+2022-09-21 14:11:16,374 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
+2022-09-21 14:11:16,377 [main] INFO API - Pass Test passed
+2022-09-21 14:11:16,410 [main] INFO API - Skipped TestCase execution starts
+2022-09-21 14:11:16,953 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
+2022-09-21 14:11:17,118 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
+2022-09-21 14:11:17,121 [main] WARN API - Skipped Test failed
+2022-09-21 14:11:17,127 [main] INFO API - Fail TestCase execution starts
+2022-09-21 14:11:17,626 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
+2022-09-21 14:11:17,768 [main] INFO API - Body is equal :   {"ClientNotFound":22,"Description":"User Not Found"}
+2022-09-21 14:11:17,773 [main] ERROR API - Fail Test failed
+2022-09-21 14:11:17,778 [main] INFO API - API Integration Automation Test Test execution finished

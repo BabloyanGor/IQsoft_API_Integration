@@ -30,6 +30,8 @@ public class BaseTest extends DriverFactory {
     public String sessionToken = readConfig.getSessionToken();
     public String currencyId = readConfig.getCurrencyId();
     public String languageId = readConfig.getLanguageId();
+    public String authorizationRequestBody ;
+    public String authorizationResponseBody;
     /////////////////////////////////////////////////////////////
 
 
@@ -43,6 +45,49 @@ public class BaseTest extends DriverFactory {
 
     public BaseTest() {
     }
+
+
+    public String authorizationAPI() throws UnirestException {
+        Gson gson = new Gson();
+        Unirest.setTimeouts(0, 0);
+        APISVariables_Authorization_Request apisVariables_authorization_request = new APISVariables_Authorization_Request();
+        apisVariables_authorization_request.setToken(sessionToken);
+        apisVariables_authorization_request.setCurrencyId(currencyId);
+        apisVariables_authorization_request.setPartnerId(partnerID);
+        apisVariables_authorization_request.setProductId(productID);
+        apisVariables_authorization_request.setLanguageId(languageId);
+        authorizationRequestBody  = gson.toJson(apisVariables_authorization_request);
+
+        HttpResponse<String> response = Unirest.post(callbackUrl + "/Authorization")
+                .header("Content-Type", "application/json")
+                .body(authorizationRequestBody )
+                //.body("{\"Token\":" + sessionToken + ", \"CurrencyId\": "+currencyId+", \"PartnerId\":" + partnerID + ", \"ProductId\":"+ productID +", \"LanguageId\": \"\"}")
+                .asString();
+        authorizationResponseBody = response.getBody();
+        return authorizationResponseBody;
+    }
+
+
+
+    @BeforeSuite
+    public void setup() throws InterruptedException {
+        logger = Logger.getLogger("API");
+        PropertyConfigurator.configure("Log4j.properties");
+        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Test Suite was started ");
+    }
+
+
+//    @AfterMethod
+//    public void tearDown() {
+//        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Test finished ");
+//    }
+
+    @AfterSuite
+    public void tearDown() {
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Test Suite finished  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ");
+    }
+
+
 
     public void writeInExel(ArrayList<String> errorSrcXl, String src, String shitName) throws IOException {
         String target = System.getProperty("user.dir") + src;
@@ -60,43 +105,8 @@ public class BaseTest extends DriverFactory {
         workbook.close();
     }
 
-    public String authorizationAPI() throws UnirestException {
-        Gson gson = new Gson();
-        Unirest.setTimeouts(0, 0);
-        APISVariables_Authorization_Request apisVariables_authorization_request = new APISVariables_Authorization_Request();
-        apisVariables_authorization_request.setToken(sessionToken);
-        apisVariables_authorization_request.setCurrencyId(currencyId);
-        apisVariables_authorization_request.setPartnerId(partnerID);
-        apisVariables_authorization_request.setProductId(productID);
-        apisVariables_authorization_request.setLanguageId(languageId);
-        String authorizationBodyValue = gson.toJson(apisVariables_authorization_request);
-
-        HttpResponse<String> response = Unirest.post(callbackUrl + "/Authorization")
-                .header("Content-Type", "application/json")
-                .body(authorizationBodyValue)
-                //.body("{\"Token\":" + sessionToken + ", \"CurrencyId\": "+currencyId+", \"PartnerId\":" + partnerID + ", \"ProductId\":"+ productID +", \"LanguageId\": \"\"}")
-                .asString();
-        String authorizationAPIBody = response.getBody();
-        return authorizationAPIBody;
-    }
-
-
-
-    @BeforeSuite
-    public void setup() throws InterruptedException {
-        logger = Logger.getLogger("API");
-        PropertyConfigurator.configure("Log4j.properties");
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Test Suite was started ");
-    }
-
-
-    @AfterMethod
-    public void tearDown() {
-        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Test finished ");
-    }
-
-    @AfterSuite
-    public void Finish() {
-        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  Test Suite finished  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ");
-    }
 }
+
+
+
+

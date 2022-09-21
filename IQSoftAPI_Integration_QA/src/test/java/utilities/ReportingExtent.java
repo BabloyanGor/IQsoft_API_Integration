@@ -19,12 +19,13 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Reporting extends TestListenerAdapter {
+public class ReportingExtent extends TestListenerAdapter {
     public ExtentHtmlReporter htmlReporter;
     public ExtentReports extent;
-    public ExtentTest logger;
+    public ExtentTest extentLogger;
+    BaseTest baseTest = new BaseTest();
 
-    public Reporting() throws AWTException {
+    public ReportingExtent() throws AWTException {
     }
 
     public void onStart(ITestContext testContext) {
@@ -38,38 +39,47 @@ public class Reporting extends TestListenerAdapter {
         extent = new ExtentReports();
 
         extent.attachReporter(htmlReporter);
-        //extent.setSystemInfo("Host name", "localhost");
+        extent.setSystemInfo("Name", "API Integration Automation Report");
         extent.setSystemInfo("Environment", "Windows");
         extent.setSystemInfo("Test", "QA Automation API");
         extent.setSystemInfo("QA Engineer", "Gor Babloyan");
 
         htmlReporter.config().setDocumentTitle("IQ Soft Integration"); // Title of report
-        htmlReporter.config().setReportName("API Automation Report"); // name of the report
+        htmlReporter.config().setReportName("API Integration Automation Report"); // name of the report
 
         htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP); //location of the chart
         htmlReporter.config().setTheme(Theme.DARK);
     }
 
     public void onTestSuccess(ITestResult tr) {
-        logger = extent.createTest(tr.getName());      // create new entry in th report
-        logger.pass(tr.getName() + " Passed");    // log test passed
-        logger.log(Status.PASS, MarkupHelper.createLabel(tr.getName(), ExtentColor.GREEN)); // send the passed information to the report with GREEN color highlighted
+        extentLogger = extent.createTest(tr.getName());      // create new entry in th report
+        extentLogger.pass(tr.getName() + " Passed");    // log test passed
+        extentLogger.log(Status.PASS, MarkupHelper.createLabel(tr.getName(), ExtentColor.GREEN)); // send the passed information to the report with GREEN color highlighted
+//        extentLogger.pass(baseTest.authorizationRequestBody);
+//        extentLogger.pass(baseTest.authorizationResponseBody);
         BaseTest.logger.info(tr.getName() + "--------------------------------------------------------->  Success");
         BaseTest.logger.info(tr.getName() + "----------------------------------------------------------");
     }
 
     public void onTestFailure(ITestResult tr) {
-        logger = extent.createTest(tr.getName()); // create new entry in th report
-        logger.fail(tr.getName() + " Failed");    // log test failed
-        logger.log(Status.FAIL, MarkupHelper.createLabel(tr.getName(), ExtentColor.RED)); // send the failed information to the report with Red color highlighted
-
-        BaseTest.logger.error(tr.getName() + "--------------------------------------------------------->   Fail");
+        extentLogger = extent.createTest(tr.getName()); // create new entry in th report
+        extentLogger.fail(tr.getName() + " Failed");    // log test failed
+        extentLogger.log(Status.FAIL, MarkupHelper.createLabel(tr.getName(), ExtentColor.RED)); // send the failed information to the report with Red color highlighted
+//        extentLogger.fail(baseTest.authorizationRequestBody);
+//        try {
+//            extentLogger.fail(baseTest.authorizationAPI());
+//        } catch (UnirestException e) {
+//            throw new RuntimeException(e);
+//        }
+        BaseTest.logger.error(tr.getName() + "--------------------------------------------------------->   Fail" );
         BaseTest.logger.error(tr.getName() + "-----------------------------------------------------------------");
     }
 
     public void onTestSkipped(ITestResult tr) {
-        logger = extent.createTest(tr.getName()); // create new entry in th report
-        logger.log(Status.SKIP, MarkupHelper.createLabel(tr.getName(), ExtentColor.ORANGE));
+        extentLogger = extent.createTest(tr.getName()); // create new entry in th report
+        extentLogger.log(Status.SKIP, MarkupHelper.createLabel(tr.getName(), ExtentColor.ORANGE));
+//        extentLogger.skip(baseTest.authorizationRequestBody);
+//        extentLogger.skip(baseTest.authorizationResponseBody);
         BaseTest.logger.warn(tr.getName() + "--------------------------------------------------------->  Skipped");
         BaseTest.logger.warn(tr.getName() + "-------------------------------------------------------------------");
     }

@@ -13,6 +13,7 @@ public class API1_OpenGame extends BaseTest {
     @Test(priority = 1)
     @Description("Verify game launching API_s Response Object (need not be null)")
     public void Pass() throws UnirestException {
+        authorizationAPI();
         logger.info("Body is equal :   "+authorizationAPI());
 //        Assert.assertTrue(true);
 
@@ -21,6 +22,7 @@ public class API1_OpenGame extends BaseTest {
     @Test(priority = 3)
     @Description("Verify game launching API_s Response Object (need not be null)")
     public void Fail() throws UnirestException {
+        authorizationAPI();
         logger.info("Body is equal :   "+authorizationAPI());
         logger.info("Body is equal :   "+authorizationAPI());
         Assert.assertTrue(false);
@@ -28,7 +30,10 @@ public class API1_OpenGame extends BaseTest {
     }
     @Test(priority = 2)
     @Description("Verify game launching API_s Response Object (need not be null)")
-    public void Skipped() {
+    public void Skipped() throws UnirestException {
+        authorizationAPI();
+        logger.info("Body is equal :   "+authorizationAPI());
+        logger.info("Body is equal :   "+authorizationAPI());
         throw new SkipException("message");
     }
 

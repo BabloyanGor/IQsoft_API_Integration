@@ -37,45 +37,45 @@ public class ReportingAllure implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        saveTextLog((iTestContext.getName()) + " Test execution starts");
-        BaseTest.logger.info((iTestContext.getName()) + " Test execution starts");
+        saveTextLog((iTestContext.getName()) + ": Test execution starts");
+        BaseTest.logger.info((iTestContext.getName()) + ": Test execution starts");
 
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        saveTextLog((iTestContext.getName()) + " Test execution finished");
-        BaseTest.logger.info((iTestContext.getName()) + " Test execution finished");
+        saveTextLog((iTestContext.getName()) + ": Test execution finished");
+        BaseTest.logger.info((iTestContext.getName()) + ": Test execution finished");
 
-    }
-
-    @Override
-    public void onTestStart(ITestResult iTestResult) {
-        saveTextLog(getTestMethodName(iTestResult) + " TestCase execution starts");
-        BaseTest.logger.info(getTestMethodName(iTestResult) + " TestCase execution starts");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        saveTextLog(getTestMethodName(iTestResult) + " Test passed");
-        BaseTest.logger.info(getTestMethodName(iTestResult) + " Test passed");
+        saveTextLog(getTestMethodName(iTestResult) + ": Test passed");
+        saveTextLog("RequestBody : " + baseTest.authorizationRequestBody);
+        saveTextLog("ResponseBody : " + baseTest.authorizationResponseBody);
+        BaseTest.logger.info(getTestMethodName(iTestResult) + ": Test passed");
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        saveTextLog(getTestMethodName(iTestResult) + " Test failed");
+        saveTextLog(getTestMethodName(iTestResult) + ": Test failed");
+        saveTextLog("RequestBody : " + baseTest.authorizationRequestBody);
+        saveTextLog("ResponseBody : " + baseTest.authorizationResponseBody);
         BaseTest.logger.error(getTestMethodName(iTestResult) + " Test failed");
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        saveTextLog(getTestMethodName(iTestResult) + " Test Skipped");
+        saveTextLog(getTestMethodName(iTestResult) + ": Test Skipped");
+        saveTextLog("RequestBody : " + baseTest.authorizationRequestBody);
+        saveTextLog("ResponseBody : " + baseTest.authorizationResponseBody);
         BaseTest.logger.warn(getTestMethodName(iTestResult) + " Test failed");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        saveTextLog(getTestMethodName(iTestResult) + " Test failed partially");
-        BaseTest.logger.error(getTestMethodName(iTestResult) + " Test failed partially");
+        saveTextLog(getTestMethodName(iTestResult) + ": Test failed partially");
+        BaseTest.logger.error(getTestMethodName(iTestResult) + ": Test failed partially");
     }
 }

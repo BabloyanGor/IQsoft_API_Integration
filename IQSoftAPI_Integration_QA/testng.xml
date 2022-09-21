@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
+<suite name="IQsoft API Integration">
     <listeners>
-<!--        <listener class-name="utilities.Reporting"/>-->
+<!--        <listener class-name="utilities.ReportingExtent"/>-->
         <listener class-name="utilities.ReportingAllure"/>
     </listeners>
-    <test name="testCases">
+    <test name="API Integration Automation Test">
         <classes>
-<!--            <class name="testCases.CraftBet_001_CasinoGamesImgWeb_Test"/>-->
-<!--            <class name="testCases.CraftBet_002_CasinoGamesIMGMobile_Test"/>-->
-<!--            <class name="testCases.CraftBet_003_CasinoGamesUrl_Test"/>-->
-<!--            <class name="testCases.CraftBet_004_CasinoSameNameCopyGames_Test"/>-->
-<!--            <class name="testCases.CraftBet_101_LifeGamesTimeOut_Test"/>-->
+            <class name="testCases.API1_OpenGame"/>
         </classes>
     </test>
 </suite>
